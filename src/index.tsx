@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { WebSocketProvider } from "./webSocketProvider/webSocketProvider";
+import { WebSocketProvider } from "./webSocketProvider";
+import { StoreProvider } from "./storeProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <WebSocketProvider>
-      <App />
+      <StoreProvider>
+        <App />
+      </StoreProvider>
     </WebSocketProvider>
   </React.StrictMode>,
   document.getElementById("root")

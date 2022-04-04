@@ -1,12 +1,12 @@
-import { createContext} from "react";
-const WebSocketContext = createContext<WebSocket| null>(null);
+import { createContext } from "react";
+const WebSocketContext = createContext<WebSocket | null>(null);
 
 const WebSocketProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }): JSX.Element => {
-  const URL ="ws://localhost:8889";
+  const URL = "ws://localhost:8889";
   let socket: WebSocket = new WebSocket(URL);
 
   if (!socket) {
@@ -17,7 +17,7 @@ const WebSocketProvider = ({
     <WebSocketContext.Provider value={socket}>
       {children}
     </WebSocketContext.Provider>
-  )
+  );
 };
 
 export { WebSocketContext, WebSocketProvider };
