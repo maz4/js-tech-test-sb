@@ -36,7 +36,12 @@ const Event = ({
   return (
     <li className="event" key={event.eventId}>
       <EventInfo event={event} />
-      <button onClick={onShowMarket}>Show Markets</button>
+      <button
+        onClick={onShowMarket}
+        disabled={event.markets.some((id) => id === market?.marketId)}
+      >
+        Show Markets
+      </button>
       {market && <MarketInfo market={market} />}
       {market && Object.values(outcomes).length !== 0 && (
         <OutcomesInfo

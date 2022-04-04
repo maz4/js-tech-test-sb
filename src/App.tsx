@@ -32,8 +32,8 @@ function App() {
 
   return (
     <div className="app">
+      <button onClick={onOddsToggle}>Show odds as {state.oddsTypeDecimal ? "fractions" : "decimal" }</button>
       <h1>Football games</h1>
-      <button onClick={onOddsToggle}>Show odds as</button>
       {socket && Object.keys(state?.events).length !== 0 && (
         <EventsList state={state} socket={socket} />
       )}
