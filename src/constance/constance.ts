@@ -10,3 +10,5 @@ export const GET_EVENT = "getEvent";
 export const GET_MARKET = "getMarket";
 export const GET_OUTCOME = "getOutcome";
 export const GET_LIVE_EVENT = "getLiveEvents";
+
+export const SET_ODDS = "SET_ODDS";

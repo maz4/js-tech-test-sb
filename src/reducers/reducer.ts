@@ -16,6 +16,11 @@ const reducer = (state: any, action: any): void => {
         ...state,
         outcomes: { ...state.outcomes, ...action.payload },
       };
+    case consts.SET_ODDS:
+      return {
+        ...state,
+        oddsTypeDecimal: action.payload,
+      };
     default:
       return state;
   }

@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { WebSocketContext } from "./webSocketProvider";
 import { StoreContext } from "./storeProvider";
 import * as consts from "./constance/constance";
 import { onMessage } from "./Handlers/webSocketHandlers";
 import EventsList from "./components/EventsList";
+import { setOdds } from "./actions/actions";
 
 function App() {
   const socket = useContext(WebSocketContext);
@@ -24,9 +25,14 @@ function App() {
     };
   }
 
+  const onOddsToggle = (): void => {
+    dispatch(setOdds(!state.oddsTypeDecimal));
+  };
+
   return (
     <div className="App">
       <h1>Football games</h1>
+      <button onClick={onOddsToggle}>Show odds as</button>
       {socket && Object.keys(state?.events).length !== 0 && (
         <EventsList state={state} socket={socket} />
       )}

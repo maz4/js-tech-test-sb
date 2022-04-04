@@ -1,4 +1,10 @@
-const OutcomesInfo = ({ outcomes }: { outcomes: Outcome[] }): JSX.Element => {
+const OutcomesInfo = ({
+  outcomes,
+  oddsTypeDecimal,
+}: {
+  outcomes: Outcome[];
+  oddsTypeDecimal: boolean;
+}): JSX.Element => {
   return (
     <div>
       <p>Outcomes:</p>
@@ -7,7 +13,11 @@ const OutcomesInfo = ({ outcomes }: { outcomes: Outcome[] }): JSX.Element => {
           return (
             <li>
               {`${outcome.name} - `}
-              {<span>{parseFloat(outcome.price.decimal).toFixed(2)}, </span>}
+              {oddsTypeDecimal ? (
+                <span>{parseFloat(outcome.price.decimal).toFixed(2)}, </span>
+              ) : (
+                <span>{`${outcome.price.num}/${outcome.price.den}`}, </span>
+              )}
             </li>
           );
         })}

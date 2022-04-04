@@ -9,11 +9,13 @@ const Event = ({
   event,
   market,
   outcomes,
+  oddsTypeDecimal,
 }: {
   socket: WebSocket;
   event: LiveEventData;
   market: MarketData;
   outcomes: Record<number, Outcome>;
+  oddsTypeDecimal: boolean;
 }): JSX.Element => {
   const [loadOutcomes, setLoadOutcomes] = useState(true);
 
@@ -40,6 +42,7 @@ const Event = ({
           outcomes={Object.values(outcomes).filter(
             (outcome) => outcome.marketId === market.marketId
           )}
+          oddsTypeDecimal={oddsTypeDecimal}
         />
       )}
     </li>

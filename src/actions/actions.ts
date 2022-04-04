@@ -26,3 +26,9 @@ export const outcomeData = (
     payload,
   };
 };
+
+export const setOdds = (
+  payload: boolean
+): { type: string; payload: boolean } => {
+  return { type: consts.SET_ODDS, payload };
+};

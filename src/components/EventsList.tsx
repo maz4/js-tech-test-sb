@@ -9,9 +9,10 @@ const EventsList = ({
     events: Record<number, LiveEventData>;
     markets: Record<number, MarketData>;
     outcomes: Record<number, Outcome>;
+    oddsTypeDecimal: boolean;
   };
 }): JSX.Element => {
-  const { events, markets, outcomes } = state;
+  const { events, markets, outcomes, oddsTypeDecimal } = state;
   return (
     <ul>
       {Object.values(events).map((event: LiveEventData): JSX.Element => {
@@ -21,6 +22,7 @@ const EventsList = ({
             event={event}
             market={markets[event?.markets[0]]}
             outcomes={outcomes}
+            oddsTypeDecimal={oddsTypeDecimal}
             key={event.eventId}
           />
         );
