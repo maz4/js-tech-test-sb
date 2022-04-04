@@ -17,3 +17,12 @@ export const marketData = (
     payload,
   };
 };
+
+export const outcomeData = (
+  payload: Record<number, Outcome>
+): { type: string; payload: Record<number, Outcome> } => {
+  return {
+    type: consts.OUTCOME_DATA,
+    payload,
+  };
+};

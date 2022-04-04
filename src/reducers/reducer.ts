@@ -11,6 +11,11 @@ const reducer = (state: any, action: any): void => {
         ...state,
         markets: { ...state.markets, ...action.payload },
       };
+    case consts.OUTCOME_DATA:
+      return {
+        ...state,
+        outcomes: { ...state.outcomes, ...action.payload },
+      };
     default:
       return state;
   }
