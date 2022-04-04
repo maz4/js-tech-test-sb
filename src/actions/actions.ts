@@ -8,3 +8,12 @@ export const liveEventData = (
     payload,
   };
 };
+
+export const marketData = (
+  payload: Record<number, MarketData>
+): { type: string; payload: Record<number, MarketData> } => {
+  return {
+    type: consts.MARKET_DATA,
+    payload,
+  };
+};

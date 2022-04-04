@@ -1,7 +1,27 @@
-const Event = ({ event }: { event: LiveEventData }): JSX.Element => {
+import EventInfo from "./EventInfo";
+import MarketInfo from "./MarketInfo";
+import { getMarket } from "../Handlers/webSocketHandlers";
+
+const Event = ({
+  socket,
+  event,
+  market,
+}: {
+  socket: WebSocket;
+  event: LiveEventData;
+  market: MarketData;
+}): JSX.Element => {
+  const onShowMarket = (): void => {
+    event.markets.forEach((market) => {
+      socket.send(getMarket(market));
+    });
+  };
+
   return (
     <li key={event.eventId}>
-      <p>{`${event.competitors[0].name} vs ${event.competitors[1].name}`}</p>
+      <EventInfo event={event} />
+      <button onClick={onShowMarket}>Show Markets</button>
+      {market && <MarketInfo market={market} />}
     </li>
   );
 };

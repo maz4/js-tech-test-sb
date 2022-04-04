@@ -6,6 +6,11 @@ const reducer = (state: any, action: any): void => {
         ...state,
         events: action.payload,
       };
+    case consts.MARKET_DATA:
+      return {
+        ...state,
+        markets: { ...state.markets, ...action.payload },
+      };
     default:
       return state;
   }

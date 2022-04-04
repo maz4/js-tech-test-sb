@@ -13,7 +13,7 @@ function App() {
     return () => {
       socket?.close();
     };
-  });
+  }, [socket]);
 
   if (socket) {
     socket.onmessage = onMessage({ state, dispatch });
@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       <h1>Football games</h1>
       {socket && Object.keys(state?.events).length !== 0 && (
-        <EventsList state={state} />
+        <EventsList state={state} socket={socket} />
       )}
     </div>
   );

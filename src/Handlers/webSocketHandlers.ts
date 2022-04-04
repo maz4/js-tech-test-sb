@@ -1,4 +1,4 @@
-import { liveEventData } from "../actions/actions";
+import { liveEventData, marketData } from "../actions/actions";
 import * as consts from "../constance/constance";
 
 export const onMessage =
@@ -18,4 +18,16 @@ export const onMessage =
 
       dispatch(liveEventData(normalizedData));
     }
+
+    if (responseData.type === consts.MARKET_DATA) {
+      const normalizedData: Record<number, MarketData> = {
+        [responseData.data.marketId]: responseData.data,
+      };
+
+      dispatch(marketData(normalizedData));
+    }
   };
+
+export const getMarket = (id: number): string => {
+  return JSON.stringify({ type: consts.GET_MARKET, id });
+};
