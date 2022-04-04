@@ -1,3 +1,5 @@
+import Event from "./Event";
+
 const EventsList = ({
   state,
 }: {
@@ -9,11 +11,7 @@ const EventsList = ({
   return (
     <ul>
       {Object.values(events).map((event: LiveEventData): JSX.Element => {
-        return (
-          <li key={event.eventId}>
-            <p>{`${event.competitors[0].name} vs ${event.competitors[1].name}`}</p>
-          </li>
-        );
+        return <Event event={event} key={event.eventId} />;
       })}
     </ul>
   );
