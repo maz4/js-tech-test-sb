@@ -1,5 +1,6 @@
 import EventInfo from "./EventInfo";
 import MarketInfo from "./MarketInfo";
+import OutcomesInfo from "./OutcomesInfo";
 import { getMarket, getOutcome } from "../Handlers/webSocketHandlers";
 import { useState } from "react";
 
@@ -7,10 +8,12 @@ const Event = ({
   socket,
   event,
   market,
+  outcomes,
 }: {
   socket: WebSocket;
   event: LiveEventData;
   market: MarketData;
+  outcomes: Record<number, Outcome>;
 }): JSX.Element => {
   const [loadOutcomes, setLoadOutcomes] = useState(true);
 
@@ -32,6 +35,13 @@ const Event = ({
       <EventInfo event={event} />
       <button onClick={onShowMarket}>Show Markets</button>
       {market && <MarketInfo market={market} />}
+      {market && Object.values(outcomes).length !== 0 && (
+        <OutcomesInfo
+          outcomes={Object.values(outcomes).filter(
+            (outcome) => outcome.marketId === market.marketId
+          )}
+        />
+      )}
     </li>
   );
 };

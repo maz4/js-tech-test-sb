@@ -24,8 +24,6 @@ function App() {
     };
   }
 
-  console.log(state);
-
   return (
     <div className="App">
       <h1>Football games</h1>
