@@ -3,6 +3,7 @@ import MarketInfo from "./MarketInfo";
 import OutcomesInfo from "./OutcomesInfo";
 import { getMarket, getOutcome } from "../Handlers/webSocketHandlers";
 import { useState } from "react";
+import "./Event.css";
 
 const Event = ({
   socket,
@@ -33,7 +34,7 @@ const Event = ({
   }
 
   return (
-    <li key={event.eventId}>
+    <li className="event" key={event.eventId}>
       <EventInfo event={event} />
       <button onClick={onShowMarket}>Show Markets</button>
       {market && <MarketInfo market={market} />}

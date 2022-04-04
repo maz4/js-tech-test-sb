@@ -1,0 +1,9 @@
+.outcomes-list {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+}
+
+.outcome-list__element {
+  margin-bottom: 5px;
+}

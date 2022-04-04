@@ -1,4 +1,5 @@
 import Event from "./Event";
+import "./EventsList.css";
 
 const EventsList = ({
   socket,
@@ -14,7 +15,7 @@ const EventsList = ({
 }): JSX.Element => {
   const { events, markets, outcomes, oddsTypeDecimal } = state;
   return (
-    <ul>
+    <ul className="events-list">
       {Object.values(events).map((event: LiveEventData): JSX.Element => {
         return (
           <Event

@@ -1,3 +1,5 @@
+import "./OutcomesInfo.css";
+
 const OutcomesInfo = ({
   outcomes,
   oddsTypeDecimal,
@@ -8,15 +10,15 @@ const OutcomesInfo = ({
   return (
     <div>
       <p>Outcomes:</p>
-      <ul>
+      <ul className="outcomes-list">
         {outcomes.map((outcome): JSX.Element => {
           return (
-            <li>
+            <li className="outcome-list__element">
               {`${outcome.name} - `}
               {oddsTypeDecimal ? (
-                <span>{parseFloat(outcome.price.decimal).toFixed(2)}, </span>
+                <span>{parseFloat(outcome.price.decimal).toFixed(2)} </span>
               ) : (
-                <span>{`${outcome.price.num}/${outcome.price.den}`}, </span>
+                <span>{`${outcome.price.num}/${outcome.price.den}`} </span>
               )}
             </li>
           );

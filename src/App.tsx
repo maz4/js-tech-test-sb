@@ -5,6 +5,7 @@ import * as consts from "./constance/constance";
 import { onMessage } from "./Handlers/webSocketHandlers";
 import EventsList from "./components/EventsList";
 import { setOdds } from "./actions/actions";
+import './App.css'
 
 function App() {
   const socket = useContext(WebSocketContext);
@@ -30,7 +31,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="app">
       <h1>Football games</h1>
       <button onClick={onOddsToggle}>Show odds as</button>
       {socket && Object.keys(state?.events).length !== 0 && (
