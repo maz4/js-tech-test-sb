@@ -3,6 +3,7 @@ import { WebSocketContext } from "./webSocketProvider";
 import { StoreContext } from "./storeProvider";
 import * as consts from "./constance/constance";
 import { onMessage } from "./Handlers/webSocketHandlers";
+import EventsList from "./components/EventsList";
 
 function App() {
   const socket = useContext(WebSocketContext);
@@ -13,8 +14,6 @@ function App() {
       socket?.close();
     };
   });
-
-  console.log(state);
 
   if (socket) {
     socket.onmessage = onMessage({ state, dispatch });
@@ -27,7 +26,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Tech Challenge</h1>
+      <h1>Football games</h1>
+      {socket && Object.keys(state?.events).length !== 0 && (
+        <EventsList state={state} />
+      )}
     </div>
   );
 }
