@@ -1,5 +1,11 @@
+import * as consts from "../constance/constance";
 const reducer = (state: any, action: any): void => {
   switch (action.type) {
+    case consts.LIVE_EVENTS_DATA:
+      return {
+        ...state,
+        events: action.payload,
+      };
     default:
       return state;
   }
