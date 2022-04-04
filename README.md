@@ -1,5 +1,69 @@
 # Sky Betting & Gaming Tech Test
 
+The technology used is React + Typescript installed through create-react-app. State management is placed inside of a React Context Provider. WebSocket is also placed inside of its own Context Provider.
+
+Tests are using Jest and React Testing Library. The tests are using a library jest-websocket-mock
+that mocks WebSocket and allows to check for sent messages.
+
+## Instruction to run the code
+
+Install dependencies
+
+npm users
+
+```
+npm run install
+```
+
+yarn users
+
+```
+yarn run install
+```
+
+Run Project:
+
+```bash
+# running the basic image
+docker run -it --rm --name sbg-tech-test-api -p 8888-8890:8888-8890 sbgtechtest/api:2.0.0
+
+# running using docker compose
+docker-compose up
+
+# running using docker compose in the background
+docker-compose up -d
+```
+
+Run frontend application
+
+npm
+
+```
+npm run start
+```
+
+yarn
+
+```
+yarn run start
+```
+
+Run the test suit
+
+npm
+
+```
+npm run test
+```
+
+yarn
+
+```
+yarn run test
+```
+
+## Sky Betting & Gaming Tech Test
+
 This test comes with a mock API and WebSocket server that represents a snapshot of some live football events we offer betting on at Sky Bet.
 
 The challenge is to build a lightweight application to display the events returned by the API and enable users to browse for more details and betting opportunities.
@@ -19,6 +83,7 @@ It is possible to explore the catalogue using the HTTP endpoints provided, howev
 ### Task One
 
 Using the provided WebSocket API:
+
 1. Build an application which displays the currently live Football events. An example of making this request is shown below.
 2. Add an option to show the primary market for each of the events
    1. The primary market should also result in the odds showing for any outcomes linked to the market
@@ -28,13 +93,15 @@ Using the provided WebSocket API:
 // The WebSocket API responds to several different actions: getEvent, getMarket, getOutcome and getLiveEvents
 // To fetch all the currently live events (without primary markets) you can do something similar to the below
 // NB. All payloads to the WebSocket API should be stringified
-websocket.send(JSON.stringify({type: "getLiveEvents", primaryMarkets: false}));
+websocket.send(
+  JSON.stringify({ type: "getLiveEvents", primaryMarkets: false })
+);
 ```
 
 ### Task Two
 
 1. Add a feature to allow users to browse for full details for one of the events (this may be a new page or some other mechanic)
-    1. Use as much of the detail in the Event response as possible to inform the user of meta data such as event type, start time and scores
+   1. Use as much of the detail in the Event response as possible to inform the user of meta data such as event type, start time and scores
 2. Event responses sent via the WebSocket only include an array of IDs for the markets it includes. Use the Event payload to build further queries to the API so you can show a list of all the markets available for the event.
 3. Markets similarly contain an array of IDs for outcomes. Use this data to initially show the outcomes for the first ten markets only.
    1. Markets should be sorted by displayOrder (ascending) and then name.
@@ -47,27 +114,28 @@ websocket.send(JSON.stringify({type: "getLiveEvents", primaryMarkets: false}));
    1. Use the included images to help understand what `status.suspended` implies for the User.
    2. Consider how the different levels of subscription affect the data received via the WebSocket.
 2. On the overview page, instead of showing all events in one list, group them by their `linkedEventTypeName` property. A missing value should cause the grouping to fall back to the `typeName` property.
-    1. Additionally, anywhere you are displaying full details of an event, where possible use the `linkedEventTypeName` to highlight the competition the event belongs to.
+   1. Additionally, anywhere you are displaying full details of an event, where possible use the `linkedEventTypeName` to highlight the competition the event belongs to.
 3. Add support for displaying markets with different types (i.e. `win-draw-win` and `correct-score`) with more appropriate layouts. (See the [live website](https://m.skybet.com) for inspiration.)
 4. Allow the user to click on outcomes to add them to a bet slip. The bet slip should display enough information about the selected outcome for the user to be able to see the event name, market name, outcome name and odds.
 5. Manage WebSocket subscriptions to allow the bet slip to listen for updates to selected outcomes and markets as and when they change, and invalidate selections as appropriate.
 
 ## Languages
 
-This is a "client side" focused test so the end deliverable should be viewable as a standard website. How you get there is up to you, though it's worth noting that we typically support a stack that uses technology such as PHP, node.js and React. We don't require you to write any form of server component but ask that you consider how you can ensure your submission will run effectively on any potential reviewers computer. 
+This is a "client side" focused test so the end deliverable should be viewable as a standard website. How you get there is up to you, though it's worth noting that we typically support a stack that uses technology such as PHP, node.js and React. We don't require you to write any form of server component but ask that you consider how you can ensure your submission will run effectively on any potential reviewers computer.
 
 ## Review Criteria
 
 All tech test submissions (for any of our tech tests) are anonymised and reviewed using a standard template.
 
 At a high level we will be looking for:
-* Clear instructions for how to run the application on a reviewer's machine
-* Good understanding of the tasks undertaken and content presented in a clear, understandable format
-* Well structured code
-* High quality code that uses relevant design patterns
-* Appropriate unit tests
-* Security best practices applied
-* Good understanding of errors and how to handle them
+
+- Clear instructions for how to run the application on a reviewer's machine
+- Good understanding of the tasks undertaken and content presented in a clear, understandable format
+- Well structured code
+- High quality code that uses relevant design patterns
+- Appropriate unit tests
+- Security best practices applied
+- Good understanding of errors and how to handle them
 
 There's flexibility in the review process to take into account candidates who have strengths in different areas. Submissions that are very strong on visual design, UX and css are equally as valid as those which focus on the underlying code.
 
@@ -77,7 +145,7 @@ As mentioned previously, we aren't prescribing any specific languages, libraries
 
 ### System Requirements
 
-* Docker
+- Docker
 
 ### Running the API and Websocket Server
 
@@ -94,7 +162,7 @@ docker-compose up
 docker-compose up -d
 ```
 
-The API will now be available on `http://localhost:8888/` and you should be able to view the available routes by hitting the API root. 
+The API will now be available on `http://localhost:8888/` and you should be able to view the available routes by hitting the API root.
 
 If you are developing on Windows it's likely that docker won't have mapped the ports to `localhost`. Run `docker-machine ip default` to find the correct IP, the ports and endpoints will be the same.
 
@@ -103,9 +171,9 @@ The WebSocket Server will be available on `ws://localhost:8889` and you can test
 ```javascript
 // In your browser's console add the following one line at a time
 const w = new WebSocket("ws://localhost:8889");
-w.addEventListener("message", m => console.log(JSON.parse(m.data)));
-w.send(JSON.stringify({type: "subscribe", keys: ["o.*"]}));
-w.send(JSON.stringify({type: "getLiveEvents", primaryMarkets: false }));
+w.addEventListener("message", (m) => console.log(JSON.parse(m.data)));
+w.send(JSON.stringify({ type: "subscribe", keys: ["o.*"] }));
+w.send(JSON.stringify({ type: "getLiveEvents", primaryMarkets: false }));
 ```
 
 See the documentation [on the docker hub page](https://hub.docker.com/r/sbgtechtest/api/) for full details of the WebSocket interface.
@@ -114,13 +182,13 @@ See the documentation [on the docker hub page](https://hub.docker.com/r/sbgtecht
 
 Replace the contents of this README.md with:
 
-  1. A covering note explaining the technology choices you have made.
-  1. Any instructions required to run your solution and tests in a Linux environment.
+1. A covering note explaining the technology choices you have made.
+1. Any instructions required to run your solution and tests in a Linux environment.
 
 Email as an attachment or a link the git bundled repository showing your commit history with all your commits on the master branch:
 
         git bundle create <anything>.bundle --all
 
-## Equality & Diversity 
+## Equality & Diversity
 
-We consider all candidates equally, fairly and without bias.  To that end, we ask that you do not leave any personally identifying information in your submission (such as your name within an author field or file, or in use as test data).  We run all VCS-based submissions through an anonymiser before assessment, so that there is no identifying information in the commit history, but this will only remove references in the committing author and email address, not deep in the code submitted.
+We consider all candidates equally, fairly and without bias. To that end, we ask that you do not leave any personally identifying information in your submission (such as your name within an author field or file, or in use as test data). We run all VCS-based submissions through an anonymiser before assessment, so that there is no identifying information in the commit history, but this will only remove references in the committing author and email address, not deep in the code submitted.
