@@ -40,7 +40,7 @@ const Event = ({
         onClick={onShowMarket}
         disabled={event.markets.some((id) => id === market?.marketId)}
       >
-        Show Markets
+        Show Market
       </button>
       {market && <MarketInfo market={market} />}
       {market && Object.values(outcomes).length !== 0 && (
